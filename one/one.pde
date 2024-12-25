@@ -10,10 +10,20 @@ int numLines = 200;
 
 float animationDuration = 1000;
 float time;
+boolean saving = true;
+String folderName;  // To store the unique folder name
 
 void setup() {
   size(800, 800);
   strokeCap(SQUARE);
+  
+  // Create unique folder name using timestamp
+  folderName = "output/frames_" + year() + nf(month(), 2) + nf(day(), 2) + "_" + 
+    nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2);
+  
+  // Create the folder
+  File folder = new File(sketchPath(folderName));
+  folder.mkdir();
   
   startPositions = new float[numLines];
   positions = new float[numLines];
@@ -52,9 +62,15 @@ void draw() {
       line(0, positions[i], width, positions[i]);
     }
   }
+  
+  // Save frames for one complete cycle
+  if (saving && frameCount <= animationDuration) {
+    saveFrame(folderName + "/frame-####.png");
+    if (frameCount == animationDuration) {
+      println("Finished saving " + animationDuration + " frames to folder: " + folderName);
+      saving = false;
+    }
+  }
 }
 
-void mousePressed() {
-  String timestamp = year() + month() + day() + "_" + hour() + minute() + second();
-  save("output/sketch_" + timestamp + ".png");
-}
+

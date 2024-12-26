@@ -2,20 +2,20 @@ import java.io.File;
 import java.util.HashMap;
 
 // Canvas and brush size configuration
-static int MAX_DIMENSION = 1200;
+static int MAX_DIMENSION = 2400;
 // Configuration constants for brush strokes
-static int GRID_SIZE = MAX_DIMENSION / 100;
+static int GRID_SIZE = MAX_DIMENSION / 120;
 // Brush sizes for different detail levels
-static float LARGE_BRUSH_LENGTH = 16 * GRID_SIZE;    // Base size for background elements
-static float MEDIUM_BRUSH_LENGTH = 8 * GRID_SIZE;   // For medium details
-static float SMALL_BRUSH_LENGTH = 4 * GRID_SIZE;    // For fine details
-static float LARGE_BRUSH_WIDTH = 4 * GRID_SIZE;     // Width for broad strokes
-static float MEDIUM_BRUSH_WIDTH = 2 * GRID_SIZE;        // Width for medium details
-static float SMALL_BRUSH_WIDTH = 1 * GRID_SIZE;   // Width for fine details
+static float LARGE_BRUSH_LENGTH = 8 * GRID_SIZE;    // Base size for background elements
+static float MEDIUM_BRUSH_LENGTH = 4 * GRID_SIZE;   // For medium details
+static float SMALL_BRUSH_LENGTH = 2 * GRID_SIZE;    // For fine details
+static float LARGE_BRUSH_WIDTH = 2 * GRID_SIZE;     // Width for broad strokes
+static float MEDIUM_BRUSH_WIDTH = 1 * GRID_SIZE;        // Width for medium details
+static float SMALL_BRUSH_WIDTH = 0.5 * GRID_SIZE;   // Width for fine details
 // Color and edge detection parameters
-static float COLOR_SIMILARITY_THRESHOLD = 20;        // Lower = more color segments
-static float EDGE_THRESHOLD = 0.001;                 // Very sensitive to detect subtle gradients
-static float BASE_COVERAGE = 0.3;                    // Minimum coverage for areas with no edges
+static float COLOR_SIMILARITY_THRESHOLD = 5;        // Lower = more color segments
+static float EDGE_THRESHOLD = 0.00001;                 // Very sensitive to detect subtle gradients
+static float BASE_COVERAGE = 0.4;                    // Minimum coverage for areas with no edges
 
 // Core resources
 PImage paperTexture;          // Background paper texture
@@ -30,7 +30,7 @@ int canvasWidth, canvasHeight;    // Store dimensions for use in settings() and 
 
 void settings() {
   // Load image first to get its dimensions
-  originalImage = loadImage("images/input.jpg");
+  originalImage = loadImage("images/input_3.png");
   
   // Calculate new dimensions maintaining aspect ratio
   float ratio = (float) originalImage.width / originalImage.height;

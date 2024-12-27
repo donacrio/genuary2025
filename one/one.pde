@@ -39,7 +39,7 @@ void setup() {
     shades[i] = random(50, 200);
     isVertical[i] = random(1) > 0.5;
     startPositions[i] = random(isVertical[i] ? width : height);
-    periods[i] = random(1, 10);
+    periods[i] = floor(random(1, 6));
     phases[i] = random(TWO_PI);
     amplitudes[i] = random(10, 25);
   }
@@ -47,13 +47,14 @@ void setup() {
 
 void draw() {
   background(245, 242, 235);
-  time = (frameCount % animationDuration) / animationDuration;
+  float normalizedTime = (frameCount % animationDuration) / (float)animationDuration;
+  time = normalizedTime * TWO_PI;
   
   for (int i = 0; i < numLines; i++) {
     strokeWeight(weights[i]);
     stroke(shades[i]);
     
-    float offset = sin(phases[i] + time * TWO_PI * periods[i]) * amplitudes[i];
+    float offset = sin(phases[i] + time * periods[i]) * amplitudes[i];
     positions[i] = startPositions[i] + offset;
     
     if (isVertical[i]) {
